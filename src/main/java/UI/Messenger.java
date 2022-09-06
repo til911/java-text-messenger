@@ -13,24 +13,23 @@ public class Messenger extends JPanel {
         GridBagConstraints c;
 
         // TOP PANEL
-        JPanel TopPanel = new JPanel();
-        TopPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        TopPanel.add(new JLabel("TOP"));
+        JPanel topPanel = new JPanel();
+        topPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+        topPanel.add(new JLabel("TOP"));
 
         // SIDE PANEL
-        JPanel SidePanel = new JPanel();
-        SidePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
-        SidePanel.add(new JLabel("SIDE"));
+        JPanel sidePanel = new JPanel();
+        sidePanel.setBorder(BorderFactory.createLineBorder(Color.GREEN, 2));
+        sidePanel.add(new JLabel("SIDE"));
 
         // CHAT PANEL
-        JPanel ChatPanel = new JPanel();
-        ChatPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
-        ChatPanel.add(new JLabel("CHAT"));
+        JPanel chatPanel = new JPanel();
+        chatPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+        chatPanel.add(new JLabel("CHAT"));
 
         // INPUT PANEL
-        JPanel InputPanel = new JPanel();
-        InputPanel.setBorder(BorderFactory.createLineBorder(Color.MAGENTA, 2));
-        InputPanel.add(new JLabel("INPUT"));
+        JTextArea inputField = new JTextArea();
+        JScrollPane inputPane = new JScrollPane(inputField);
 
         // TOP PANEL LAYOUT
         c = new GridBagConstraints();
@@ -41,19 +40,19 @@ public class Messenger extends JPanel {
         c.gridwidth = 3;
         c.gridheight = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
-        this.add(TopPanel, c);
+        this.add(topPanel, c);
 
         // SIDE PANEL LAYOUT
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 1;
-        c.weightx = 3;
+        c.weightx = 0.2;
         c.weighty = 1;
         c.gridwidth = 1;
         c.gridheight = 2;
-        c.fill = GridBagConstraints.VERTICAL;
+        c.fill = GridBagConstraints.BOTH;
         c.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(SidePanel, c);
+        this.add(sidePanel, c);
 
         // CHAT PANEL LAYOUT
         c = new GridBagConstraints();
@@ -64,18 +63,17 @@ public class Messenger extends JPanel {
         c.gridwidth = 3;
         c.gridheight = 1;
         c.fill = GridBagConstraints.BOTH;
-        this.add(ChatPanel, c);
+        this.add(chatPanel, c);
 
         // INPUT PANEL LAYOUT
         c = new GridBagConstraints();
         c.gridx = 2;
         c.gridy = 2;
         c.weightx = 1;
-        c.weighty = 0.5;
+        c.weighty = 0.2;
         c.gridwidth = 1;
         c.gridheight = 0;
         c.fill = GridBagConstraints.BOTH;
-//        c.anchor = GridBagConstraints.LAST_LINE_END;
-        this.add(InputPanel, c);
+        this.add(inputPane, c);
     }
 }
