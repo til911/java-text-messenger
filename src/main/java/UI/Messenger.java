@@ -7,6 +7,17 @@ import java.awt.*;
 import java.util.Vector;
 
 public class Messenger extends JPanel {
+
+    @Override
+    public Dimension getSize() {
+        return new Dimension(800, 500);
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return getSize();
+    }
+
     public Messenger(UIManager uiManager) {
         this.setLayout(new GridBagLayout());
 
