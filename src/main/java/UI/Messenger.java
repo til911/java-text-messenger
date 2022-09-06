@@ -1,13 +1,14 @@
 package UI;
 
+import Logic.SaveManager;
 import Logic.UIManager;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Vector;
 
 public class Messenger extends JPanel {
-
     @Override
     public Dimension getSize() {
         return new Dimension(800, 500);
@@ -39,8 +40,17 @@ public class Messenger extends JPanel {
         chatPanel.add(new JLabel("CHAT"));
 
         // INPUT PANEL
+        JPanel inputPanel = new JPanel(new BorderLayout());
         JTextArea inputField = new JTextArea();
+        inputField.setRows(4);
+        inputField.requestFocusInWindow();
         JScrollPane inputPane = new JScrollPane(inputField);
+        JButton sendButton = new JButton("send");
+
+        inputPanel.add(inputPane, BorderLayout.CENTER);
+        inputPanel.add(sendButton, BorderLayout.EAST);
+
+        inputPanel.add(inputPane, BorderLayout.CENTER);
 
         // TOP PANEL LAYOUT
         c = new GridBagConstraints();
@@ -81,10 +91,10 @@ public class Messenger extends JPanel {
         c.gridx = 2;
         c.gridy = 2;
         c.weightx = 1;
-        c.weighty = 0.2;
+        c.weighty = 0;
         c.gridwidth = 1;
         c.gridheight = 0;
         c.fill = GridBagConstraints.BOTH;
-        this.add(inputPane, c);
+        this.add(inputPanel, c);
     }
 }
