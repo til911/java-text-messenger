@@ -11,10 +11,7 @@ public class UIManager {
     JFrame frame = new JFrame();
 
     public UIManager() {
-//        frame.add(new Login(this)); frame.setResizable(false);
-//        frame.pack();
-//        frame.setVisible(true);
-        SwitchState(State.RUNNING);
+        SwitchState(State.LOGIN);
         frame.setVisible(true);
     }
 

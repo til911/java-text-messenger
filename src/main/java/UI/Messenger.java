@@ -61,6 +61,7 @@ public class Messenger extends JPanel {
             }
             AppendMessage(msg);
             inputField.setText("");
+            inputField.requestFocusInWindow();
         });
 
         inputPanel.add(inputPane, BorderLayout.CENTER);
