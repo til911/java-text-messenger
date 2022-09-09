@@ -43,9 +43,9 @@ public class UIManager {
                 frame.add(new Messenger(this));
                 break;
         }
-        frame.pack();
         frame.validate();
         frame.pack();
+        frame.setMinimumSize(frame.getContentPane().getPreferredSize());
     }
 }
 

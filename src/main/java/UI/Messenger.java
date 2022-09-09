@@ -4,7 +4,8 @@ import Logic.SaveManager;
 import Logic.UIManager;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.Vector;
 
@@ -18,6 +19,14 @@ public class Messenger extends JPanel {
     public Dimension getPreferredSize() {
         return getSize();
     }
+
+    @Override
+    public void repaint() {
+        super.repaint();
+        // RESIZE EACH TEXZ MESSAGE WIDTH
+    }
+
+    private JPanel chatPanel = new JPanel();
 
     public Messenger(UIManager uiManager) {
         this.setLayout(new GridBagLayout());
@@ -35,9 +44,7 @@ public class Messenger extends JPanel {
         sidePanel.add(new JLabel("SIDE"));
 
         // CHAT PANEL
-        JPanel chatPanel = new JPanel();
-        chatPanel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
-        chatPanel.add(new JLabel("CHAT"));
+        chatPanel.setLayout(new BoxLayout(chatPanel, BoxLayout.Y_AXIS));
 
         // INPUT PANEL
         JPanel inputPanel = new JPanel(new BorderLayout());
@@ -45,12 +52,19 @@ public class Messenger extends JPanel {
         inputField.setRows(4);
         inputField.requestFocusInWindow();
         JScrollPane inputPane = new JScrollPane(inputField);
+
         JButton sendButton = new JButton("send");
+        sendButton.addActionListener(e -> {
+            String msg = inputField.getText();
+            if (msg.equals("")){
+                return;
+            }
+            AppendMessage(msg);
+            inputField.setText("");
+        });
 
         inputPanel.add(inputPane, BorderLayout.CENTER);
         inputPanel.add(sendButton, BorderLayout.EAST);
-
-        inputPanel.add(inputPane, BorderLayout.CENTER);
 
         // TOP PANEL LAYOUT
         c = new GridBagConstraints();
@@ -83,7 +97,8 @@ public class Messenger extends JPanel {
         c.weighty = 1;
         c.gridwidth = 3;
         c.gridheight = 1;
-        c.fill = GridBagConstraints.BOTH;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.LAST_LINE_START;
         this.add(chatPanel, c);
 
         // INPUT PANEL LAYOUT
@@ -96,5 +111,23 @@ public class Messenger extends JPanel {
         c.gridheight = 0;
         c.fill = GridBagConstraints.BOTH;
         this.add(inputPanel, c);
+    }
+
+    private void AppendMessage(String msg) {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        Color msgColor = new Color((int)(255*0.8),0,0);
+
+        Font nameFont = new Font("Helvetica", Font.BOLD, 12);
+        TitledBorder titledBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(msgColor, 1), SaveManager.GetUserName(), TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP, nameFont);
+        titledBorder.setTitleColor(msgColor);
+        panel.setBorder(titledBorder);
+
+
+        JLabel message = new JLabel(msg);
+        panel.add(message, BorderLayout.WEST);
+
+        chatPanel.add(panel);
+        revalidate();
     }
 }

@@ -29,6 +29,10 @@ public class SaveManager {
         return null;
     }
 
+    public static String GetUserName(){
+        return userJson.getString("name");
+    }
+
     private static JSONObject GetJsonFrom(String path) {
         try {
             String fileContent = Files.readString(Path.of(path));
